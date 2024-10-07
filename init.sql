@@ -1,4 +1,3 @@
--- Create the device table in PostgreSQL
 CREATE TABLE device (
     device_sn VARCHAR(50) PRIMARY KEY, 
     hostname VARCHAR(255) NOT NULL,
