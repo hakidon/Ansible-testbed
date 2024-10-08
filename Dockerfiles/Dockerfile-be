@@ -13,7 +13,10 @@ RUN curl "https://raw.githubusercontent.com/hakidon/Ansible-testbed/refs/heads/m
 RUN curl -o ~/.ansible.cfg "https://raw.githubusercontent.com/hakidon/Ansible-testbed/refs/heads/main/ansible-config"
 
 # Install Express
-RUN npm install -g express nodemon pg
+RUN npm install -g  nodemon 
+RUN npm install express
+RUN npm install pg
+
 RUN curl -o server.js "https://raw.githubusercontent.com/hakidon/Ansible-testbed/refs/heads/main/server.js"
 
 # Create ansible directory and download files
