@@ -1,0 +1,19 @@
+# Use the official Node.js image as a base
+FROM node:latest
+
+# Update and install necessary packages
+RUN apt update && \
+    apt install -y nano net-tools iputils-ping curl tmux 
+
+# Set the working directory
+WORKDIR /home/node
+
+# Install Express
+RUN npx create-react-app ansible-fe
+WORKDIR /home/node/ansible-fe
+
+RUN curl -o src/App.js "https://raw.githubusercontent.com/hakidon/Ansible-testbed/refs/heads/main/App.js"
+
+EXPOSE 3000
+
+CMD ["npm", "start"]

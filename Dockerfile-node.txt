@@ -21,4 +21,8 @@ RUN mkdir -p ansible && \
     curl -o ansible/inventory "https://raw.githubusercontent.com/hakidon/Ansible-testbed/refs/heads/main/ansible/inventory" && \
     curl -o ansible/info_ios.yml "https://raw.githubusercontent.com/hakidon/Ansible-testbed/refs/heads/main/ansible/info_ios.yml"
 
-RUN tmux new-session -d -s node 'node server.js'
+EXPOSE 5000
+
+#RUN tmux new-session -d -s node 'node server.js'
+CMD ["node", "server.js"]
+
