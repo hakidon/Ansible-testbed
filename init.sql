@@ -1,6 +1,6 @@
 CREATE DATABASE ansible;
 
-\connect sample;
+\connect ansible;
 
 CREATE TABLE device (
     device_sn VARCHAR(50) PRIMARY KEY, 
