@@ -27,5 +27,6 @@ RUN mkdir -p ansible && \
 EXPOSE 5000
 
 #RUN tmux new-session -d -s node 'node server.js'
-CMD ["nodemon", "server.js"]
+CMD ["tmux", "new-session", "-s", "server", "-d", "nodemon server.js"]
+
 

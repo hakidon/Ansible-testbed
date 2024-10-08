@@ -58,6 +58,15 @@ app.get('/db-check', async (req, res) => {
   }
 });
 
+app.get('/get-device', async (req, res) => {
+  try {
+    const result = await client.query('SELECT * FROM device');
+    res.json({ devices: result.rows, code: 0 });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
