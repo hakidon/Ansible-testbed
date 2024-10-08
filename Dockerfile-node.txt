@@ -14,7 +14,7 @@ RUN curl -o ~/.ansible.cfg "https://raw.githubusercontent.com/hakidon/Ansible-te
 
 # Install Express
 RUN npm install express
-curl -o server.js "https://raw.githubusercontent.com/hakidon/Ansible-testbed/refs/heads/main/server.js"
+RUN curl -o server.js "https://raw.githubusercontent.com/hakidon/Ansible-testbed/refs/heads/main/server.js"
 
 # Create ansible directory and download files
 RUN mkdir -p ansible && \
