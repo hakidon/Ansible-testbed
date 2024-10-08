@@ -3,7 +3,7 @@ FROM node:latest
 
 # Update and install necessary packages
 RUN apt update && \
-    apt install -y nano net-tools iputils-ping curl tmux python3-ansible python3-paramiko
+    apt install -y nano net-tools iputils-ping curl tmux python3-paramiko ansible
 
 # Set the working directory
 WORKDIR /home/node
@@ -20,3 +20,5 @@ RUN curl -o server.js "https://raw.githubusercontent.com/hakidon/Ansible-testbed
 RUN mkdir -p ansible && \
     curl -o ansible/inventory "https://raw.githubusercontent.com/hakidon/Ansible-testbed/refs/heads/main/ansible/inventory" && \
     curl -o ansible/info_ios.yml "https://raw.githubusercontent.com/hakidon/Ansible-testbed/refs/heads/main/ansible/info_ios.yml"
+
+RUN tmux new-session -d -s node 'node server.js'
