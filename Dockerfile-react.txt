@@ -9,7 +9,7 @@ RUN apt update && \
 WORKDIR /home/node
 
 # Install Express
-RUN npx create-react-app ansible-fe
+RUN npx --yes create-react-app ansible-fe
 WORKDIR /home/node/ansible-fe
 
 RUN curl -o src/App.js "https://raw.githubusercontent.com/hakidon/Ansible-testbed/refs/heads/main/App.js"
