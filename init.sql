@@ -1,4 +1,4 @@
-CREATE DATABASE sample;
+CREATE DATABASE ansible;
 
 \connect sample;
 
