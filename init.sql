@@ -1,7 +1,3 @@
-CREATE DATABASE ansible;
-
-\connect ansible;
-
 CREATE TABLE device (
     device_sn VARCHAR(50) PRIMARY KEY, 
     hostname VARCHAR(255) NOT NULL,

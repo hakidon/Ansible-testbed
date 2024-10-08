@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  db:
+    build:
+      context: Dockerfiles
+      dockerfile: Dockerfile-db
+  be:
+    build:
+      context: Dockerfiles
+      dockerfile: Dockerfile-be
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+
+  fe:
+    build:
+      context: Dockerfiles
+      dockerfile: Dockerfile-fe
+    ports:
+      - "3000:3000"
+    depends_on:
+      - be

@@ -2,7 +2,7 @@
 FROM postgres:latest
 
 # Set environment variables for PostgreSQL
-ENV POSTGRES_DB=sample
+ENV POSTGRES_DB=ansible
 ENV POSTGRES_USER=postgres
 ENV POSTGRES_PASSWORD=test123
 
