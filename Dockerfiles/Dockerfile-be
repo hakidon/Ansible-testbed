@@ -3,7 +3,7 @@ FROM node:latest
 
 # Update and install necessary packages
 RUN apt update && \
-    apt install -y nano net-tools iputils-ping curl tmux python3-paramiko ansible
+    apt install -y nano net-tools iputils-ping curl tmux postgresql-client python3-paramiko ansible
 
 # Set the working directory
 WORKDIR /home/node
