@@ -3,11 +3,11 @@ version: '3.8'
 services:
   db:
     build:
-      context: Dockerfiles
+      context: .
       dockerfile: Dockerfile-db
   be:
     build:
-      context: Dockerfiles
+      context: .
       dockerfile: Dockerfile-be
     ports:
       - "5000:5000"
@@ -16,7 +16,7 @@ services:
 
   fe:
     build:
-      context: Dockerfiles
+      context: .
       dockerfile: Dockerfile-fe
     ports:
       - "3000:3000"
