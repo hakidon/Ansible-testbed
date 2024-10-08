@@ -1,0 +1,22 @@
+# Use the official Node.js image as a base
+FROM node:latest
+
+# Update and install necessary packages
+RUN apt update && \
+    apt install -y nano net-tools iputils-ping curl tmux python3-ansible python3-paramiko
+
+# Set the working directory
+WORKDIR /home/node
+
+# Download and append to ssh-config
+RUN curl "https://raw.githubusercontent.com/hakidon/Ansible-testbed/refs/heads/main/ssh-config" >> /etc/ssh/ssh_config
+RUN curl -o ~/.ansible.cfg "https://raw.githubusercontent.com/hakidon/Ansible-testbed/refs/heads/main/ansible-config"
+
+# Install Express
+RUN npm install express
+curl -o server.js "https://raw.githubusercontent.com/hakidon/Ansible-testbed/refs/heads/main/server.js"
+
+# Create ansible directory and download files
+RUN mkdir -p ansible && \
+    curl -o ansible/inventory "https://raw.githubusercontent.com/hakidon/Ansible-testbed/refs/heads/main/ansible/inventory" && \
+    curl -o ansible/info_ios.yml "https://raw.githubusercontent.com/hakidon/Ansible-testbed/refs/heads/main/ansible/info_ios.yml"

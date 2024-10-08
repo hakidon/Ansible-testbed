@@ -1,0 +1,17 @@
+# Use the official PostgreSQL image as a base
+FROM postgres:latest
+
+# Set environment variables for PostgreSQL
+ENV POSTGRES_DB=sample
+ENV POSTGRES_USER=postgres
+ENV POSTGRES_PASSWORD=test123
+
+# Create a directory for the SQL script
+WORKDIR /docker-entrypoint-initdb.d
+
+RUN apt update
+
+RUN apt install curl -y
+
+# Download the SQL script and save it as init.sql
+RUN curl -o init.sql "https://raw.githubusercontent.com/hakidon/Ansible-testbed/refs/heads/main/init.sql"

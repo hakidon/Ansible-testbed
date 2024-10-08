@@ -1,0 +1,11 @@
+cisco_ios:
+  hosts: *
+  vars:
+    ansible_network_os: cisco.ios.ios
+    ansible_user: *
+    ansible_password: *
+    ansible_connection: ansible.netcommon.network_cli
+    ansible_become: yes
+    ansible_become_method: enable
+    ansible_become_password: *
+    device_os: IOS

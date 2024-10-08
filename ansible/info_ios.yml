@@ -1,0 +1,14 @@
+---
+- name: Retrieve Cisco IOS show version
+  hosts: cisco_ios
+  gather_facts: no
+  tasks:
+    - name: Get show version output
+      ios_command:
+        commands:
+          - show version
+      register: show_version_output
+
+    - name: Display the output
+      debug:
+        var: show_version_output.stdout[0]
