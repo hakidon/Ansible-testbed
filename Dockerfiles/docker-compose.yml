@@ -5,6 +5,11 @@ services:
     build:
       context: .
       dockerfile: Dockerfile-db
+    networks:
+      docker-net:
+        ipv4_address: 192.168.0.2
+    hostname: db
+
   be:
     build:
       context: .
@@ -13,6 +18,10 @@ services:
       - "5000:5000"
     depends_on:
       - db
+    networks:
+      docker-net:
+        ipv4_address: 192.168.0.3
+    hostname: be
 
   fe:
     build:
@@ -22,3 +31,14 @@ services:
       - "3000:3000"
     depends_on:
       - be
+    networks:
+      docker-net:
+        ipv4_address: 192.168.0.4
+    hostname: fe
+
+networks:
+  docker-net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.0.0/24
