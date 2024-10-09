@@ -12,11 +12,11 @@ WORKDIR /home/node
 RUN npx --yes create-react-app ansible-fe
 WORKDIR /home/node/ansible-fe
 
-RUN curl -o src/App.js "https://raw.githubusercontent.com/hakidon/Ansible-testbed/refs/heads/main/App.js"
-RUN curl -o src/DeviceTable.js "https://raw.githubusercontent.com/hakidon/Ansible-testbed/refs/heads/main/DeviceTable.js"
-RUN curl -o src/FetchButton.js "https://raw.githubusercontent.com/hakidon/Ansible-testbed/refs/heads/main/FetchButton.js"
+RUN curl -o src/App.js "https://raw.githubusercontent.com/hakidon/Ansible-testbed/refs/heads/main/fe/src/App.js"
+RUN curl -o src/DeviceTable.js "https://raw.githubusercontent.com/hakidon/Ansible-testbed/refs/heads/main/fe/src/DeviceTable.js"
+RUN curl -o src/FetchButton.js "https://raw.githubusercontent.com/hakidon/Ansible-testbed/refs/heads/main/fe/src/FetchButton.js"
 
-RUN curl -o src/DeviceTable.css "https://raw.githubusercontent.com/hakidon/Ansible-testbed/refs/heads/main/DeviceTable.css"
+RUN curl -o src/DeviceTable.css "https://raw.githubusercontent.com/hakidon/Ansible-testbed/refs/heads/main/fe/src/DeviceTable.css"
 
 EXPOSE 3000
 

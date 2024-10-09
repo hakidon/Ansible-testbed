@@ -9,15 +9,15 @@ RUN apt update && \
 WORKDIR /home/node
 
 # Download and append to ssh-config
-RUN curl "https://raw.githubusercontent.com/hakidon/Ansible-testbed/refs/heads/main/ssh-config" >> /etc/ssh/ssh_config
-RUN curl -o ~/.ansible.cfg "https://raw.githubusercontent.com/hakidon/Ansible-testbed/refs/heads/main/ansible-config"
+RUN curl "https://raw.githubusercontent.com/hakidon/Ansible-testbed/refs/heads/main/ansible/ssh-config" >> /etc/ssh/ssh_config
+RUN curl -o ~/.ansible.cfg "https://raw.githubusercontent.com/hakidon/Ansible-testbed/refs/heads/main/ansible/ansible-config"
 
 # Install Express
 RUN npm install -g nodemon && \
     npm install express pg cors
 
 
-RUN curl -o server.js "https://raw.githubusercontent.com/hakidon/Ansible-testbed/refs/heads/main/server.js"
+RUN curl -o server.js "https://raw.githubusercontent.com/hakidon/Ansible-testbed/refs/heads/main/be/server.js"
 
 # Create ansible directory and download files
 RUN mkdir -p ansible && \

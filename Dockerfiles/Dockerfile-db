@@ -14,4 +14,4 @@ RUN apt update
 RUN apt install curl -y
 
 # Download the SQL script and save it as init.sql
-RUN curl -o init.sql "https://raw.githubusercontent.com/hakidon/Ansible-testbed/refs/heads/main/init.sql"
+RUN curl -o init.sql "https://raw.githubusercontent.com/hakidon/Ansible-testbed/refs/heads/main/db/init.sql"
