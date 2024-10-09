@@ -3,7 +3,7 @@ FROM node:latest
 
 # Update and install necessary packages
 RUN apt update && \
-    apt install -y nano net-tools iputils-ping curl tmux postgresql-client python3-paramiko ansible
+    apt install -y nano net-tools iputils-ping curl tmux postgresql-client python3-paramiko python3-pip python3.11-venv
 
 # Set the working directory
 WORKDIR /home/node
@@ -22,10 +22,13 @@ RUN curl -o server.js "https://raw.githubusercontent.com/hakidon/Ansible-testbed
 # Create ansible directory and download files
 RUN mkdir -p ansible && \
     curl -o ansible/inventory "https://raw.githubusercontent.com/hakidon/Ansible-testbed/refs/heads/main/ansible/inventory" && \
-    curl -o ansible/info_ios.yml "https://raw.githubusercontent.com/hakidon/Ansible-testbed/refs/heads/main/ansible/info_ios.yml"
+    curl -o ansible/info_ios.yml "https://raw.githubusercontent.com/hakidon/Ansible-testbed/refs/heads/main/ansible/info_ios.yml" && \
+    git clone https://github.com/CiscoDevNet/ansible-pyats.git ansible/roles/ansible-pyats && \
+    apt-get update && \
+    python3 -m venv python-venv && \
+    /bin/bash -c "source python-venv/bin/activate && pip install ansible pyats genie"
 
-EXPOSE 5000
+    EXPOSE 5000
 
-CMD ["nodemon", "server.js"]
-
+    CMD ["/bin/bash", "-c", "source python-venv/bin/activate && nodemon server.js"]
 
