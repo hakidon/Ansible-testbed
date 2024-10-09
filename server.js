@@ -1,10 +1,12 @@
 const express = require('express');
+const cors = require('cors'); 
 const { exec } = require('child_process');
 const { Client } = require('pg');
 
 const app = express();
 const PORT = 5000;
 
+app.use(cors()); // Use the cors middleware
 app.use(express.json());
 
 const client = new Client({
