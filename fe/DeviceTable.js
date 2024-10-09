@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import './DeviceTable.css'; // Import the CSS file
 
 function DeviceTable() {
   const [devices, setDevices] = useState([]);
