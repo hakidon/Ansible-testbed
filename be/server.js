@@ -11,7 +11,7 @@ app.use(express.json());
 
 const client = new Client({
   user: 'postgres',
-  host: 'db',
+  host: '172.17.0.2',
   database: 'ansible',
   password: 'test123',
   port: 5432, // default PostgreSQL port
