@@ -9,9 +9,26 @@ const PORT = 5000;
 app.use(cors()); // Use the cors middleware
 app.use(express.json());
 
+function parseLogToJson(log) {
+  const jsonMatch = log.match(/"msg": "(.*)"/);
+  
+  if (jsonMatch && jsonMatch[1]) {
+      const jsonString = jsonMatch[1].replace(/\\"/g, '"');
+      
+      try {
+          return JSON.parse(jsonString);
+      } catch (error) {
+          console.error('Failed to parse JSON:', error);
+      }
+  } else {
+      console.error('No JSON found in the log.');
+  }
+  return null;
+}
+
 const client = new Client({
   user: 'postgres',
-  host: '172.17.0.2',
+  host: '172.17.0.4',
   database: 'ansible',
   password: 'test123',
   port: 5432, // default PostgreSQL port

@@ -1,0 +1,41 @@
+- name: Gather Info
+  hosts:
+  - cisco_ios
+  connection: network_cli
+  gather_facts: no
+  roles:
+  - ansible-pyats
+  ignore_errors: yes
+
+  tasks:
+
+  # - name: Output
+  #   debug:
+  #     msg:
+  #     - "Hostname: {{ nxos_version.hostname }}"
+  #     - "Serial Number: {{ nxos_version.serial_number }}"
+  #     - "OS Version: {{ nxos_version.nxos_version }}"
+  #     - "Hardware Model: {{ nxos_version.hardware_model }}"
+
+  - name: Simple select query to acme db
+    community.postgresql.postgresql_query:
+      login_user: postgres
+      login_password: test123
+      login_host: 172.17.0.4
+      # login_port: 5432
+      db: ansible
+      query: SELECT * FROM device
+    register: db_version
+    #   query: INSERT INTO device (serial_number, hostname, os_version, hardware_model) VALUES (%s, %s, %s, %s)
+    #   positional_args:
+    #   - '{{ nxos_version.hostname }}'
+    #   - '{{ nxos_version.serial_number }}'
+    #   - '{{ nxos_version.nxos_version }}'
+    #   - '{{ nxos_version.hardware_model }}'
+    # register: db_version
+
+
+  - name: Output
+    debug:
+      msg:
+      - "{{ db_version }}"

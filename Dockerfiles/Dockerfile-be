@@ -26,9 +26,13 @@ RUN mkdir -p ansible && \
     git clone https://github.com/CiscoDevNet/ansible-pyats.git ansible/roles/ansible-pyats && \
     apt-get update && \
     python3 -m venv python-venv && \
-    /bin/bash -c "source python-venv/bin/activate && pip install ansible pyats genie"
+    /bin/bash -c "source python-venv/bin/activate && pip install ansible pyats genie psycopg2"
 
-    EXPOSE 5000
+# Get custom parser
+RUN mkdir -p ansible/custom-parser/library/ && \
+    curl -o ansible/custom-parser/library/custom_parse_command.py "https://raw.githubusercontent.com/hakidon/Ansible-testbed/refs/heads/main/ansible/custom-parser/library/custom_parse_command.py"
 
-    CMD ["/bin/bash", "-c", "source python-venv/bin/activate && nodemon server.js"]
+EXPOSE 5000
+
+CMD ["/bin/bash", "-c", "source python-venv/bin/activate && nodemon server.js"]
 

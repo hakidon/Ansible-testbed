@@ -10,4 +10,4 @@ curl -o Dockerfiles/Dockerfile-fe https://raw.githubusercontent.com/hakidon/Ansi
 curl -o Dockerfiles/docker-compose.yml https://raw.githubusercontent.com/hakidon/Ansible-testbed/refs/heads/main/Dockerfiles/docker-compose.yml
 
 # Start the Docker Compose services
-sudo docker compose -f Dockerfiles/docker-compose.yml up -d
+# sudo docker compose -f Dockerfiles/docker-compose.yml up -d

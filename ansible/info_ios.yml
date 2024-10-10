@@ -1,11 +1,12 @@
 ---
 - hosts: cisco_ios
+  gather_facts: no
   roles:
     - ansible-pyats
   tasks:
     - name: Run a command and get structured output
       pyats_parse_command:
-        command: show ip route
+        command: show version
       register: output
 
     - debug:
