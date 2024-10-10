@@ -1,13 +1,92 @@
----
-- hosts: cisco_ios
+- name: Gather Info
+  hosts:
+  - cisco_nxos
+  - cisco_ios
+  connection: network_cli
   gather_facts: no
   roles:
-    - ansible-pyats
-  tasks:
-    - name: Run a command and get structured output
-      pyats_parse_command:
-        command: show version
-      register: output
+  - custom-parser
+  - ansible-pyats
+  ignore_errors: yes
 
-    - debug:
-        var: output.structured
+  tasks:
+  - name: Command get inventory for NXOS
+    custom_parse_command:
+      command: show inventory
+    register: inventory
+
+  - name: Command get fan for NXOS
+    custom_parse_command:
+      command: show environment fan
+    register: fan
+
+  - name: Command get power for NXOS
+    custom_parse_command:
+      command: show environment power
+    register: power
+
+  - name: Command get resources
+    custom_parse_command:
+      command: show system resources
+    register: resources
+
+  # running specific command
+  - name: Command get version for NXOS
+    custom_parse_command:
+      command: show version
+    register: nxos_version
+    when: device_os == 'NXOS'
+
+  - name: Command get version for IOS
+    pyats_parse_command:
+      command: show version
+    register: ios_version
+    when: device_os == 'IOS'
+
+  - name: Set facts for database insertion
+    set_fact:
+      device_facts:
+        serial_number: "{{ nxos_version.serial_number if device_os == 'NXOS' else ios_version.structured.version.chassis_sn }}"
+        hostname: "{{ nxos_version.hostname if device_os == 'NXOS' else ios_version.structured.version.hostname }}"
+        ip_address: "{{ ansible_host }}"
+        os_version: "{{ nxos_version.nxos_version if device_os == 'NXOS' else ios_version.structured.version.version }}"
+        hardware_model: "{{ nxos_version.hardware_model if device_os == 'NXOS' else ios_version.structured.version.chassis }}"
+        uptime: "{{ nxos_version.uptime if device_os == 'NXOS' else ios_version.structured.version.uptime }}"
+        cpu_consumption: "{{ resources.cpu_usage }}"
+        memory_consumption: "{{ resources.memory_usage }}"
+
+  - name: Output device facts
+    debug:
+      msg: "{{ device_facts }}"
+
+  - name: Simple select query to acme db
+    community.postgresql.postgresql_query:
+      login_user: postgres
+      login_password: test123
+      login_host: 172.17.0.4
+      db: ansible
+      query: |
+        INSERT INTO device (device_sn, hostname, ip, os_version, hardware_model, uptime, cpu_consumption, memory_consumption)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+        ON CONFLICT (device_sn) DO UPDATE
+        SET hostname = EXCLUDED.hostname,
+            ip = EXCLUDED.ip,
+            os_version = EXCLUDED.os_version,
+            hardware_model = EXCLUDED.hardware_model,
+            uptime = EXCLUDED.uptime,
+            cpu_consumption = EXCLUDED.cpu_consumption,
+            memory_consumption = EXCLUDED.memory_consumption
+      positional_args:
+      - '{{ device_facts.serial_number }}'
+      - '{{ device_facts.hostname }}'
+      - '{{ device_facts.ip_address }}'
+      - '{{ device_facts.os_version }}'
+      - '{{ device_facts.hardware_model }}'
+      - '{{ device_facts.uptime }}'
+      - '{{ device_facts.cpu_consumption }}'
+      - '{{ device_facts.memory_consumption }}'
+    register: db_version
+
+  - name: Output database result
+    debug:
+      msg: "{{ db_version }}"

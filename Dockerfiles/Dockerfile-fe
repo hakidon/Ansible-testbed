@@ -17,6 +17,7 @@ RUN curl -o src/DeviceTable.js "https://raw.githubusercontent.com/hakidon/Ansibl
 RUN curl -o src/FetchButton.js "https://raw.githubusercontent.com/hakidon/Ansible-testbed/refs/heads/main/fe/src/FetchButton.js"
 
 RUN curl -o src/DeviceTable.css "https://raw.githubusercontent.com/hakidon/Ansible-testbed/refs/heads/main/fe/src/DeviceTable.css"
+RUN curl -o src/FetchButton.css "https://raw.githubusercontent.com/hakidon/Ansible-testbed/refs/heads/main/fe/src/FetchButton.css"
 
 EXPOSE 3000
 
