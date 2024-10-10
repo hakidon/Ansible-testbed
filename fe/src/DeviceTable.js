@@ -13,7 +13,7 @@ function DeviceTable() {
 
   return (
     <div>
-      <h1>Device List</h1>
+      <h1>Ansible - Web Application Demo</h1>
       <table>
         <thead>
           <tr>

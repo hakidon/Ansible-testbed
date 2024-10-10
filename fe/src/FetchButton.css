@@ -1,0 +1,46 @@
+/* styles.css */
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  #fetch-button {
+    display: block; /* Ensure the button takes up full width */
+    margin: 20px auto 0; /* Center horizontally with top margin */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #28a745; /* Success color */
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  #fetch-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  #fetch-button:hover:not(:disabled) {
+    background-color: #218838; /* Darker green on hover */
+  }
+  
+  .loading-popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    text-align: center;
+    padding-top: 20%;
+    font-size: 24px;
+  }
+  
+  .loading-popup.active {
+    display: block;
+  }

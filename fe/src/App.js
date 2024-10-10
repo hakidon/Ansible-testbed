@@ -5,9 +5,8 @@ import FetchButton from './FetchButton';
 function App() {
   return (
     <div>
-      <h1>Hello World</h1>
-      <FetchButton />
       <DeviceTable />
+      <FetchButton />
     </div>
   );
 }
