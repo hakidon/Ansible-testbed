@@ -28,7 +28,7 @@ function parseLogToJson(log) {
 
 const client = new Client({
   user: 'postgres',
-  host: '172.17.0.4',
+  host: 'db',
   database: 'ansible',
   password: 'test123',
   port: 5432, // default PostgreSQL port
