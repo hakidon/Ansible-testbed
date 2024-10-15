@@ -63,7 +63,7 @@
     community.postgresql.postgresql_query:
       login_user: postgres
       login_password: test123
-      login_host: 172.17.0.4
+      login_host: db
       db: ansible
       query: |
         INSERT INTO device (device_sn, hostname, ip, os_version, hardware_model, uptime, cpu_consumption, memory_consumption)
