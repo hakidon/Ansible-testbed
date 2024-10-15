@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile-db
     networks:
       docker-net:
-        ipv4_address: 172.17.0.2
+        ipv4_address: 192.168.100.2
     hostname: db
     container_name: db
     volumes:
@@ -23,7 +23,7 @@ services:
       - db
     networks:
       docker-net:
-        ipv4_address: 172.17.0.3
+        ipv4_address: 192.168.100.3
     hostname: be
     container_name: be
     volumes:
@@ -39,7 +39,7 @@ services:
       - be
     networks:
       docker-net:
-        ipv4_address:  172.17.0.4
+        ipv4_address: 192.168.100.4
     hostname: fe
     container_name: fe
     volumes:
@@ -50,7 +50,7 @@ networks:
     driver: bridge
     ipam:
       config:
-        - subnet: 172.17.0.0/16
+        - subnet: 192.168.100.0/24 
 
 volumes:
   db:
