@@ -26,14 +26,17 @@ download_files() {
   done <<< "$types"
 }
 
-# Check if URL is provided
+# Check if URL and directory are provided
 if [ -z "$1" ]; then
-  echo "Usage: $0 <url>"
+  echo "Usage: $0 <url> [directory]"
   exit 1
 fi
+
+# Set the directory to the second parameter or default to the current directory
+dir=${2:-.}
 
 # Fetch the JSON response
 json=$(curl -s "$1")
 
 # Start downloading files
-download_files "." "$json"
+download_files "$dir" "$json"

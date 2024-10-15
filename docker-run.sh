@@ -13,7 +13,7 @@ curl -o Dockerfiles/be/server.js https://raw.githubusercontent.com/hakidon/Ansib
 curl -o Dockerfiles/fe/download-repo.sh https://raw.githubusercontent.com/hakidon/Ansible-testbed/refs/heads/main/scripts/download-repo.sh
 
 chmod +x Dockerfiles/fe/download-repo.sh
-./Dockerfiles/fe/download-repo.sh https://api.github.com/repos/hakidon/Ansible-testbed/contents/fe/src
+.download-repo.sh https://api.github.com/repos/hakidon/Ansible-testbed/contents/fe/src Dockerfiles/fe
 
 
 # Start the Docker Compose services
