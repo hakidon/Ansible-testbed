@@ -22,6 +22,9 @@ services:
       docker-net:
         ipv4_address: 192.168.0.3
     hostname: be
+    container_name: be
+    volumes:
+      - ./be/server.js:/home/node/server.js
 
   fe:
     build:
@@ -35,6 +38,9 @@ services:
       docker-net:
         ipv4_address: 192.168.0.4
     hostname: fe
+    container_name: fe
+    volumes:
+      - ./fe/src:/home/node/src
 
 networks:
   docker-net:
