@@ -42,7 +42,7 @@ services:
     hostname: fe
     container_name: fe
     volumes:
-      - ./fe/src:/home/node/src
+      - ./fe/src:/home/node/ansible-fe/src
 
 networks:
   docker-net:
