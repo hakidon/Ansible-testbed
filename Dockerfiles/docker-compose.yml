@@ -9,6 +9,8 @@ services:
       docker-net:
         ipv4_address: 192.168.0.2
     hostname: db
+    volumes:
+      - ./db:/var/lib/postgresql/data
 
   be:
     build:
@@ -48,3 +50,8 @@ networks:
     ipam:
       config:
         - subnet: 192.168.0.0/24
+
+volumes:
+  db:
+  be:
+  fe:
