@@ -2,7 +2,9 @@ version: '2.29.2'
 
 services:
   db:
-    image: hakidon/ansible-webapp-db:latest
+    build:
+      context: .
+      dockerfile: Dockerfile-db
     networks:
       docker-net:
         ipv4_address: 192.168.100.2
@@ -12,7 +14,9 @@ services:
       - ./db:/var/lib/postgresql/data
 
   be:
-    image: hakidon/ansible-webapp-be:latest
+    build:
+      context: .
+      dockerfile: Dockerfile-be
     ports:
       - "5000:5000"
     depends_on:
@@ -26,7 +30,9 @@ services:
       - ./be/server.js:/home/node/server.js
 
   fe:
-    image: hakidon/ansible-webapp-fe:latest
+    build:
+      context: .
+      dockerfile: Dockerfile-fe
     ports:
       - "3000:3000"
     depends_on:
