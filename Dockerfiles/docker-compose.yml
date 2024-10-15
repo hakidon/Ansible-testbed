@@ -9,6 +9,7 @@ services:
       docker-net:
         ipv4_address: 192.168.0.2
     hostname: db
+    container_name: db
     volumes:
       - ./db:/var/lib/postgresql/data
 

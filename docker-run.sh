@@ -20,4 +20,4 @@ chmod +x download-repo.sh
 
 
 # Start the Docker Compose services
-# sudo docker compose -f Dockerfiles/docker-compose.yml up -d
+sudo docker compose -f Dockerfiles/docker-compose.yml up -d
