@@ -4,19 +4,21 @@
 sudo apt update
 sudo apt install git curl -y
 
-# Function to show a loading progress bar
-show_progress() {
+# Function to show elapsed time for the installation
+show_timer() {
+    local duration=0
     echo -n "Installing Docker"
     while ps aux | grep -q "[s]nap install docker"; do
-        echo -n "."
         sleep 1
+        duration=$((duration + 1))
+        echo -ne "\rInstalling Docker... ${duration} seconds"
     done
-    echo " Done!"
+    echo -e "\rInstalling Docker... Done!"
 }
 
-# Install Docker with a progress indicator
+# Install Docker with a timer
 sudo snap install docker &
-show_progress
+show_timer
 
 # Clone the repository
 git clone https://github.com/hakidon/Ansible-testbed.git 
