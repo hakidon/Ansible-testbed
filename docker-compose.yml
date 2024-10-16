@@ -5,8 +5,8 @@ services:
     image: hakidon/ansible-webapp-db:latest
     hostname: db
     container_name: db
-    volumes:
-      - ./db:/var/lib/postgresql/data
+    # volumes:
+    #   - ./db:/var/lib/postgresql/data
 
   be:
     image: hakidon/ansible-webapp-be:latest
@@ -32,6 +32,6 @@ services:
       - ./fe/src:/home/node/ansible-fe/src
 
 volumes:
-  db:
+  # db:
   be:
   fe:
