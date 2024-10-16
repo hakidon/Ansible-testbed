@@ -20,7 +20,6 @@ services:
       - ./be/server.js:/home/node/server.js
       - ./be/ansible:/home/node/ansible
 
-
   fe:
     image: hakidon/ansible-webapp-fe:latest
     ports:

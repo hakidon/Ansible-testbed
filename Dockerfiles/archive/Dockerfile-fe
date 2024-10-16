@@ -1,0 +1,24 @@
+# Use the official Node.js image as a base
+FROM node:latest
+
+# Update and install necessary packages
+RUN apt update && \
+    apt install -y nano net-tools iputils-ping curl tmux 
+
+# Set the working directory
+WORKDIR /home/node
+
+# Install Express
+RUN npx --yes create-react-app ansible-fe
+WORKDIR /home/node/ansible-fe
+
+RUN curl -o src/App.js "https://raw.githubusercontent.com/hakidon/Ansible-testbed/refs/heads/main/fe/src/App.js"
+RUN curl -o src/DeviceTable.js "https://raw.githubusercontent.com/hakidon/Ansible-testbed/refs/heads/main/fe/src/DeviceTable.js"
+RUN curl -o src/FetchButton.js "https://raw.githubusercontent.com/hakidon/Ansible-testbed/refs/heads/main/fe/src/FetchButton.js"
+
+RUN curl -o src/DeviceTable.css "https://raw.githubusercontent.com/hakidon/Ansible-testbed/refs/heads/main/fe/src/DeviceTable.css"
+RUN curl -o src/FetchButton.css "https://raw.githubusercontent.com/hakidon/Ansible-testbed/refs/heads/main/fe/src/FetchButton.css"
+
+EXPOSE 3000
+
+CMD ["npm", "start"]

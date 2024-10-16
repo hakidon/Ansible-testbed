@@ -1,23 +1,32 @@
 #!/bin/bash
 
-# Create a directory named Dockerfiles
-mkdir -p Dockerfiles
+# Update package list
+apt update
 
-# Download files into the Dockerfiles directory
-# curl -o Dockerfiles/Dockerfile-db https://raw.githubusercontent.com/hakidon/Ansible-testbed/refs/heads/main/Dockerfiles/Dockerfile-db
-# curl -o Dockerfiles/Dockerfile-be https://raw.githubusercontent.com/hakidon/Ansible-testbed/refs/heads/main/Dockerfiles/Dockerfile-be
-# curl -o Dockerfiles/Dockerfile-fe https://raw.githubusercontent.com/hakidon/Ansible-testbed/refs/heads/main/Dockerfiles/Dockerfile-fe
-curl -o Dockerfiles/docker-compose.yml https://raw.githubusercontent.com/hakidon/Ansible-testbed/refs/heads/main/Dockerfiles/docker-compose.yml
+# Install Docker and necessary tools
+if apt install -y docker curl git; then
+    echo "Docker, curl, and git installed successfully."
+else
+    echo "Failed to install Docker, curl, or git."
+    # Try to use snap if installation failed
+    if sudo snap install docker; then
+        echo "Docker installed via snap."
+    else
+        echo "Failed to install Docker via snap. Trying yum..."
+        # Check if yum is available (for RHEL/CentOS)
+        if command -v yum &> /dev/null; then
+            if yum install -y docker; then
+                echo "Docker installed via yum."
+            else
+                echo "Failed to install Docker via yum."
+                echo "Your operating system is not supported."
+            fi
+        else
+            echo "Your operating system is not supported."
+        fi
+    fi
+fi
 
-mkdir -p Dockerfiles/be
-mkdir -p Dockerfiles/fe/src
+git clone https://github.com/hakidon/Ansible-testbed.git 
 
-curl -o Dockerfiles/be/server.js https://raw.githubusercontent.com/hakidon/Ansible-testbed/refs/heads/main/be/server.js
-curl -o download-repo.sh https://raw.githubusercontent.com/hakidon/Ansible-testbed/refs/heads/main/scripts/download-repo.sh
-
-chmod +x download-repo.sh
-./download-repo.sh https://api.github.com/repos/hakidon/Ansible-testbed/contents/fe/src Dockerfiles/fe/src
-
-
-# Start the Docker Compose services
-#sudo docker compose -f Dockerfiles/docker-compose.yml up -d
+sudo docker compose -f docker-compose.yml up -d
