@@ -66,6 +66,7 @@ install_package docker
 install_package curl
 install_package git
 
-git clone https://github.com/hakidon/Ansible-testbed.git && cd Ansible-testbed
+git clone https://github.com/hakidon/Ansible-testbed.git 
+cd Ansible-testbed
 
 sudo docker compose -f docker-compose.yml up -d
