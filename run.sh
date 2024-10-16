@@ -7,11 +7,11 @@ sudo apt install git curl -y
 # Function to show elapsed time for the installation
 show_timer() {
     local duration=0
-    echo -n "Installing Docker"
+    echo -n "Installing Docker (Usually installation takes around 2 mins -> 120 secs)"
     while ps aux | grep -q "[s]nap install docker"; do
         sleep 1
         duration=$((duration + 1))
-        echo -ne "\rInstalling Docker... ${duration} seconds"
+        echo -e "\rInstalling Docker... ${duration} seconds"
     done
     echo -e "\rInstalling Docker... Done!"
 }
