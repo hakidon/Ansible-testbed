@@ -3,9 +3,6 @@ version: '2.29.2'
 services:
   db:
     image: hakidon/ansible-webapp-db:latest
-    networks:
-      docker-net:
-        ipv4_address: 192.168.100.2
     hostname: db
     container_name: db
     volumes:
@@ -17,13 +14,12 @@ services:
       - "5000:5000"
     depends_on:
       - db
-    networks:
-      docker-net:
-        ipv4_address: 192.168.100.3
     hostname: be
     container_name: be
     volumes:
       - ./be/server.js:/home/node/server.js
+      - ./be/ansible:/home/node/ansible
+
 
   fe:
     image: hakidon/ansible-webapp-fe:latest
@@ -31,20 +27,10 @@ services:
       - "3000:3000"
     depends_on:
       - be
-    networks:
-      docker-net:
-        ipv4_address: 192.168.100.4
     hostname: fe
     container_name: fe
     volumes:
       - ./fe/src:/home/node/ansible-fe/src
-
-networks:
-  docker-net:
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 192.168.100.0/24 
 
 volumes:
   db:
